@@ -1,0 +1,5 @@
+
+AuthName "Accès protégé"
+AuthType Basic
+AuthUserFile /home/bbchr/www/.htpasswd
+Require valid-user
