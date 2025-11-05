@@ -7,13 +7,8 @@ session_start();
 // Dans le cas contraire il devra s'identifier.
 // Vérifie si un cookie valide existe déjà
 if (isset($_COOKIE['authToken'])) {
-    if ($_COOKIE['authToken'] === 'adminToken') {
-        header('Location: page_admin.php');
-        exit();
-    } elseif ($_COOKIE['authToken'] === 'userToken') {
-        header('Location: page_user.php');
-        exit();
-    }
+    header('Location: page_admin.php');
+    exit();
 }
 
 // Gérer la soumission du formulaire
@@ -24,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification simple du username et de son password.
     // Si ok alors on initialise le cookie sur le poste de l'utilisateur 
     if ($username === 'admin' && $password === 'secret') {
-        setcookie('authToken', 'adminToken', time() + 60, '/', '', false, true); // Le Cookie est initialisé et valable pendant 1 heure (3600 secondes) 
+        setcookie('authToken', bin2hex(random_bytes(16)), time() + 60, '/', '', false, true); // Le Cookie est initialisé et valable pendant 1 heure (3600 secondes) 
         header('Location: page_admin.php'); // L'utilisateur est dirigé vers la page home.php
         exit();
     } if ($username === 'user' && $password === 'utilisateur') {
-        setcookie('authToken', 'userToken', time() + 60, '/', '', false, true); // Le Cookie est initialisé et valable pendant 1 heure (3600 secondes) 
+        setcookie('authToken', bin2hex(random_bytes(16)), time() + 60, '/', '', false, true); // Le Cookie est initialisé et valable pendant 1 heure (3600 secondes) 
         header('Location: page_user.php'); // L'utilisateur est dirigé vers la page home.php
         exit();
     } else {
