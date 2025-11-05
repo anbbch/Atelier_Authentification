@@ -1,7 +1,7 @@
 <?php
 // Nom d'utilisateur et mot de passe corrects
-$username = $_SERVER['username'];
-$password = $_SERVER['password'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 $is_admin = ($username === 'admin' && $password === 'secret');
 $is_user = ($username === 'user' && $password === 'utilisateur');
